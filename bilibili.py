@@ -235,7 +235,7 @@ class Bilibili:
                     'appkey': Bilibili.app_key,
                     'sign': self.calc_sign(f"appkey={Bilibili.app_key}"),
                 }
-                while True:
+                for _ in range(10):
                     response = self._requests("post", url, data=payload)
                     if response and response.get("code") == 0:
                         return {
@@ -244,6 +244,7 @@ class Bilibili:
                         }
                     else:
                         time.sleep(1)
+                raise Exception("Login: get key error!")
 
             while True:
                 key = get_key()
