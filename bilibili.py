@@ -35,7 +35,7 @@ import threading
 import time
 import toml
 from multiprocessing import freeze_support, Manager, Pool, Process
-from selenium import webdriver
+# from selenium import webdriver
 from urllib import parse
 
 __author__ = "Hsury"
@@ -44,7 +44,8 @@ __license__ = "SATA"
 __version__ = "2020.7.20"
 
 class Bilibili:
-    app_key = "bca7e84c2d947ac6"
+    app_key = "bb3101000e232e27"
+    appsec = "36efcfed79309338ced0380abd824ac1"
     patterns = {
         'video': {
             'id': 1,
@@ -162,7 +163,7 @@ class Bilibili:
 
     @staticmethod
     def calc_sign(param):
-        salt = "60698ba2f68e01ce44738920a0ffe768"
+        salt = Bilibili.appsec
         sign_hash = hashlib.md5()
         sign_hash.update(f"{param}{salt}".encode())
         return sign_hash.hexdigest()
